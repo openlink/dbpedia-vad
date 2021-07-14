@@ -302,7 +302,7 @@ create procedure DB.DBA.DBP_LINK_HDR (in in_path varchar)
 	alt := alt || sprintf ('<%s>; rel="hub", ', registry_get ('dbp_pshb_hub'));
       exp := sprintf ('Expires: %s\r\n', date_rfc1123 (dateadd ('day', 7, now ())));
     }
-  lic := '<http://creativecommons.org/licenses/by-sa/3.0/>;rel="license",';
+  lic := '<http://creativecommons.org/licenses/by-sa/3.0/>; rel="license", ';
   return sprintf ('%s%sLink: %s%s<http://dbpedia.mementodepot.org/timegate/http://%s%s>; rel="timegate"', exp, loc, lic, alt, host, in_path);
 }
 ;

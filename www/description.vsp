@@ -9,8 +9,6 @@
 >
 <?vsp
 --
---  $Id$
---
 --  This file is part of the OpenLink Software Virtuoso Open-Source (VOS)
 --  project.
 --
@@ -171,7 +169,7 @@
        rdf_link2 := rdf_link2 || '.rdf';
      }
 
-   links := 'Link: <http://creativecommons.org/licenses/by-sa/3.0/>;rel="license", ';
+   links := 'Link: <http://creativecommons.org/licenses/by-sa/3.0/>; rel="license", ';
    links := links || sprintf ('<%s>; rel="alternate"; type="application/rdf+xml"; title="Structured Descriptor Document (RDF/XML format)", ', rdf_link2);
    links := links || sprintf ('<%s>; rel="alternate"; type="text/n3"; title="Structured Descriptor Document (N3 format)", ',rdf_link);
    links := links || sprintf ('<%s>; rel="alternate"; type="text/turtle"; title="Structured Descriptor Document (Turtle format)", ',rdf_link5);
