@@ -1,65 +1,57 @@
-#  
-#  This file is part of the OpenLink Software Virtuoso Open-Source (VOS)
-#  project.
-#  
-#  Copyright (C) 1998-2021 OpenLink Software
-#  
-#  This project is free software; you can redistribute it and/or modify it
-#  under the terms of the GNU General Public License as published by the
-#  Free Software Foundation; only version 2 of the License, dated June 1991.
-#  
-#  This program is distributed in the hope that it will be useful, but
-#  WITHOUT ANY WARRANTY; without even the implied warranty of
-#  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
-#  General Public License for more details.
-#  
-#  You should have received a copy of the GNU General Public License along
-#  with this program; if not, write to the Free Software Foundation, Inc.,
-#  51 Franklin St, Fifth Floor, Boston, MA 02110-1301 USA
-#  
-#  
+DBPEDIA_STICKER	:= dbpedia_sticker.xml
+DBPEDIA_FILES	:= \
+	$(srcdir)/.gitignore \
+	$(srcdir)/AUTHORS \
+	$(srcdir)/COPYING \
+	$(srcdir)/COPYING.md \
+	$(srcdir)/LICENSE.md \
+	$(srcdir)/Makefile.am \
+	$(srcdir)/README.md \
+	$(srcdir)/autogen.sh \
+	$(srcdir)/configure.ac \
+	$(srcdir)/dbpedia_sticker.xml \
+	$(srcdir)/gen_version.sh \
+	$(srcdir)/make_vad.sh \
+	$(srcdir)/sql/*.sql \
+	$(srcdir)/vad_version \
+	$(srcdir)/vadpacker/*.py \
+	$(srcdir)/vadpacker/.gitignore \
+	$(srcdir)/vadpacker/AUTHORS \
+	$(srcdir)/vadpacker/COPYING \
+	$(srcdir)/vadpacker/ChangeLog \
+	$(srcdir)/vadpacker/NEWS \
+	$(srcdir)/vadpacker/README \
+	$(srcdir)/vadpacker/README-elementtree \
+	$(srcdir)/vadpacker/elementtree/*.py \
+	$(srcdir)/www/*.vsp \
+	$(srcdir)/www/statics/css/*.css \
+	$(srcdir)/www/statics/fonts/glyphicons-halflings-regular.eot \
+	$(srcdir)/www/statics/fonts/glyphicons-halflings-regular.svg \
+	$(srcdir)/www/statics/fonts/glyphicons-halflings-regular.ttf \
+	$(srcdir)/www/statics/fonts/glyphicons-halflings-regular.woff \
+	$(srcdir)/www/statics/fonts/glyphicons-halflings-regular.woff2 \
+	$(srcdir)/www/statics/images/*.gif \
+	$(srcdir)/www/statics/images/*.png \
+	$(srcdir)/www/statics/images/rdf_w3c.svg \
+	$(srcdir)/www/statics/images/sw-vert-v.svg \
+	$(srcdir)/www/statics/js/*.js
 
-TOP=@TOP@
+VERSION		:= $(shell ./gen_version.sh)
+NEED_VERSION	:= 07.20.3226
 
-if WITH_DBPEDIA_VAD
-nodist_vad_DATA = dbpedia_dav.vad
-endif
+vad_DATA 	:= dbpedia_dav.vad
 
-noinst_SCRIPTS = make_vad.sh
-CLEANFILES =  \
-	dbpedia_dav.vad \
-	dbpedia_filesystem.vad \
-	make_dbpedia_vad.log \
-	make_vad.output \
-	vad_dav.xml \
-	vad_fs.xml \
-	virtuoso.pxa
+dbpedia_dav.vad: $(DBPEDIA_FILES) $(DBPEDIA_STICKER) Makefile vad_version
+	@PYTHON@ @VADPACKER@ -o dbpedia_dav.vad \
+		--var="VERSION=$(VERSION)" \
+		--var="BASE_PATH=/DAV/VAD" \
+		--var="TYPE=dav" \
+		--var="ISDAV=1" \
+		--var="NEED_VERSION=$(NEED_VERSION)" \
+		$(DBPEDIA_STICKER)
+	ls -l dbpedia_dav.vad
 
 
-dbpedia_filesystem.vad dbpedia_dav.vad: $(EXTRA_DIST)
-	PATH="$(TOP)/binsrc/virtuoso:$(TOP)/binsrc/tests:.:$$PATH" PORT=$(PORT) HOME="$(TOP)" HOST=localhost $(SHELL) ./make_vad.sh
+CLEANFILES = *.vad
 
-clean-local:
-	-rm -rf vad
-
-# ----------------------------------------------------------------------
-#
-#  Additional files to distribute
-#
-# ----------------------------------------------------------------------
-EXTRA_DIST = \
-	*.sql \
-	make_vad.sh \
-	vad_version \
-	vsp/*.sql \
-	vsp/*.vsp \
-	vsp/statics/css/*.css \
-	vsp/statics/fonts/*.eot \
-	vsp/statics/fonts/*.svg \
-	vsp/statics/fonts/*.ttf \
-	vsp/statics/fonts/*.woff \
-	vsp/statics/fonts/*.woff2 \
-	vsp/statics/images/*.gif \
-	vsp/statics/images/*.png \
-	vsp/statics/images/*.svg \
-	vsp/statics/js/*.js
+EXTRA_DIST = $(DBPEDIA_FILES) $(DBPEDIA_STICKER)
