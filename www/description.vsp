@@ -111,9 +111,16 @@
 
    __box_flags_set (page_resource_uri, 2);
 
+
+   -- SPARQL endpoint
+   sparql_endpoint := sprintf ('%s://%s/sparql',
+	case when is_https_ctx() then 'https' else 'http' end,
+	http_request_header (http_request_header (), 'Host'));
+
+
    -- setup rdf alternative links
-   rdf_link := sprintf('http://%s/sparql?default-graph-uri=%U&query=%U',
-		http_request_header (http_request_header (), 'Host'),
+   rdf_link := sprintf('%s?default-graph-uri=%U&query=%U',
+		sparql_endpoint,
 		registry_get ('dbp_graph'),
 		'DESCRIBE <' || charset_recode (page_resource_uri, 'UTF-8', '_WIDE_') || '>');
 
@@ -133,9 +140,9 @@
    else if (page_resource_uri like 'http://%/ontology/%')
      {
        project_home_page := registry_get('dbp_graph') || '/resource/classes#';
-     rdf_link2 := dbp_ldd_get_proxy (replace (page_resource_uri, '/ontology/', '/data3/'));
-       rdf_link := sprintf('http://%s/sparql?default-graph-uri=%U&query=%U',
-		http_request_header (http_request_header (), 'Host'),
+       rdf_link2 := dbp_ldd_get_proxy (replace (page_resource_uri, '/ontology/', '/data3/'));
+       rdf_link := sprintf('%s?default-graph-uri=%U&query=%U',
+		sparql_endpoint,
 		registry_get ('dbp_graph') || '/resource/classes',
 		'DESCRIBE <' || charset_recode (page_resource_uri, 'UTF-8', '_WIDE_') || '>');
        gen_rdf_link := rdf_link;
@@ -146,6 +153,10 @@
      rdf_link2 := dbp_ldd_get_proxy (replace (page_resource_uri, '/meta/', '/data5/'));
    else
      rdf_link2 := rdf_link;
+
+   if (is_https_ctx())
+     rdf_link2 := replace (rdf_link2, 'http://', 'https://');
+
    if (rdf_link2 not like '%/data%/%')
      {
        rdf_link2 := rdf_link || '&format=rdf';
