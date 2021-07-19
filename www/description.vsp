@@ -30,8 +30,8 @@
 --
 
    declare _G, _S, _P, _O, odd_position any;
-   declare _resource_, project_name, project_home_page any;
-   declare page_resource_uri, rdf_link, rdf_link2, rdf_link3, rdf_link4, rdf_link5, atom_link, jsod, ntriples, label, true_label, _subject, csv_link, cxml_link, gen_rdf_link, text_link, md_json_link, json_ld_link, embed_json, embed_turtle any;
+   declare _resource_, project_name, project_home_page, sparql_endpoint any;
+   declare page_resource_uri, rdf_link, rdf_link2, rdf_link3, rdf_link4, rdf_link5, atom_link, jsod_link, ntriples, label, true_label, _subject, csv_link, cxml_link, gen_rdf_link, text_link, md_json_link, json_ld_link, embed_json, embed_turtle any;
    declare iri_type, iri_uri, white_page, pkgs, txt, host, links, langs, dset, tmp_lines any;
    declare _thumbnail any;
 
@@ -153,7 +153,7 @@
        rdf_link4 := rdf_link || '&format=application%2Frdf%2Bjson';
        rdf_link5 := rdf_link  || '&format=text%2Fturtle';
        atom_link := rdf_link || '&format=application%2Fatom%2Bxml';
-       jsod := rdf_link      || '&format=application%2Fodata%2Bjson';
+       jsod_link := rdf_link      || '&format=application%2Fodata%2Bjson';
        ntriples := rdf_link  || '&format=text%2Fplain';
        rdf_link := rdf_link  || '&format=text%2Fn3';
      }
@@ -164,7 +164,7 @@
        rdf_link4 := rdf_link2 || '.jrdf';
        rdf_link5 := rdf_link2 || '.ttl';
        atom_link := rdf_link2 || '.atom';
-       jsod := rdf_link2      || '.jsod';
+       jsod_link := rdf_link2      || '.jsod';
        ntriples := rdf_link2  || '.ntriples';
        rdf_link2 := rdf_link2 || '.rdf';
      }
