@@ -61,7 +61,6 @@
 
 <!-- statics -->
     <file type="$TYPE$" source_uri="www/statics/css/*.css" target_uri="dbpedia/statics/css/$f$" />
-    <file type="$TYPE$" source_uri="www/statics/fonts/*" target_uri="dbpedia/statics/fonts/$f$" />
     <file type="$TYPE$" source_uri="www/statics/images/*" target_uri="dbpedia/statics/images/$f$" />
     <file type="$TYPE$" source_uri="www/statics/js/*.js" target_uri="dbpedia/statics/js/$f$" />
 </resources>

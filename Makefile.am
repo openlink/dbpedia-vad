@@ -25,15 +25,9 @@ DBPEDIA_FILES	:= \
 	$(srcdir)/vadpacker/elementtree/*.py \
 	$(srcdir)/www/*.vsp \
 	$(srcdir)/www/statics/css/*.css \
-	$(srcdir)/www/statics/fonts/glyphicons-halflings-regular.eot \
-	$(srcdir)/www/statics/fonts/glyphicons-halflings-regular.svg \
-	$(srcdir)/www/statics/fonts/glyphicons-halflings-regular.ttf \
-	$(srcdir)/www/statics/fonts/glyphicons-halflings-regular.woff \
-	$(srcdir)/www/statics/fonts/glyphicons-halflings-regular.woff2 \
 	$(srcdir)/www/statics/images/*.gif \
 	$(srcdir)/www/statics/images/*.png \
-	$(srcdir)/www/statics/images/rdf_w3c.svg \
-	$(srcdir)/www/statics/images/sw-vert-v.svg \
+	$(srcdir)/www/statics/images/*.svg \
 	$(srcdir)/www/statics/js/*.js
 
 VERSION		:= $(shell ./gen_version.sh)
