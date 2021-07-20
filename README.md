@@ -21,7 +21,7 @@ To install and run the package, you need a recent version of:
 * ensure git is setup functional on your computer
 * choose a folder (directory) into which you want to copy this repository
 * situate yourself in the designated folder using the `cd {folder-name}` command
-* execute ```git clone https://github.com/openlink/dbpedia```
+* execute ```git clone https://github.com/openlink/dbpedia-vad```
 
 # How do i build the package?
 ```shell
