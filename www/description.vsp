@@ -239,11 +239,13 @@
 ?>
 
 <!-- header -->
-<head profile="http://www.w3.org/1999/xhtml/vocab">
+<head>
     <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
     <title>About: <?V charset_recode (label, 'UTF-8', '_WIDE_') ?></title>
+
+    <!-- Links -->
     <link rel="alternate" type="application/rdf+xml" 		href="<?V charset_recode (rdf_link2, 'UTF-8', '_WIDE_') ?>" title="Structured Descriptor Document (RDF/XML format)" />
     <link rel="alternate" type="text/n3" 			href="<?V charset_recode (rdf_link, 'UTF-8', '_WIDE_') ?>" title="Structured Descriptor Document (N3 format)" />
     <link rel="alternate" type="text/turtle" 			href="<?V charset_recode (rdf_link5, 'UTF-8', '_WIDE_') ?>" title="Structured Descriptor Document (Turtle format)" />
@@ -263,240 +265,258 @@
     <link rel="timegate" type="text/html" 			href="http://dbpedia.mementodepot.org/timegate/<?V charset_recode(_resource_, 'UTF-8', '_WIDE_') ?>" title="Time Machine" />
     <link rel="foaf:primarytopic" 				href="<?V charset_recode (page_resource_uri, 'UTF-8', '_WIDE_') ?>"/>
     <link rev="describedby" 					href="<?V charset_recode (page_resource_uri, 'UTF-8', '_WIDE_') ?>"/>
-    <link rel="stylesheet" type="text/css"			href="/statics/css/bootstrap.min.css" />
-    <link rel="stylesheet" type="text/css" 			href="/statics/css/dbpedia.css" />
+    <!-- /Links -->
+
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" />
+    <!-- link rel="stylesheet" href="/statics/css/dbpedia.css" -->
+    <!-- /Stylesheets-->
 
     <!-- OpenGraph -->
     <meta property="og:title"       content="<?= charset_recode(label, 'UTF-8', '_WIDE_') ?>" />
     <meta property="og:type"        content="article" />
     <meta property="og:url"         content="<?V charset_recode(page_resource_uri, 'UTF-8', '_WIDE_') ?>" />
     <meta property="og:image"       content="<?= _thumbnail ?>" />
-    <meta property="og:description" content="<?vsp http (sprintf ('%s', _subject)); ?>" />
+    <meta property="og:description" content="<?V _subject ?>" />
     <meta property="og:site_name"   content="DBpedia" />
-    <!-- -->
+    <!-- /OpenGraph-->
 </head>
 <body about="<?V charset_recode(page_resource_uri, 'UTF-8', '_WIDE_') ?>">
-<div class="navbar navbar-default navbar-fixed-top">
-    <div class="container">
-	<div class="navbar-header">
-	    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#dbp-navbar" aria-expanded="false">
-		<span class="sr-only">Toggle navigation</span>
-		<span class="icon-bar"></span>
-		<span class="icon-bar"></span>
-		<span class="icon-bar"></span>
-	    </button>
-	    <a class="navbar-brand" href="<?=registry_get('dbp_imprint') ?>" title="About DBpedia" style="color: #2c5078">
-	    <img class="img-responsive" src="/statics/images/dbpedia_logo_land_120.png" alt="About DBpedia" style="display: inline-block;  margin-top: -12px"/>
-	    </a>
-	</div>
+
+<!-- navbar -->
+<nav class="navbar navbar-expand-md navbar-light bg-light fixed-top align-items-center">
+    <div class="container-xl">
+	<a class="navbar-brand" href="<?=registry_get('dbp_imprint') ?>" title="About DBpedia" style="color: #2c5078">
+	    <img class="img-fluid" src="/statics/images/dbpedia_logo_land_120.png" alt="About DBpedia" />
+	</a>
+	<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#dbp-navbar" aria-controls="dbp-navbar" aria-expanded="false" aria-label="Toggle navigation">
+	    <span class="navbar-toggler-icon"></span>
+	</button>
 
 	<div class="collapse navbar-collapse" id="dbp-navbar">
-	    <ul class="nav navbar-nav navbar-right">
-		<li><a class="active" href="/fct/" title="Switch to /fct endpoint"><span class="glyphicon glyphicon-new-window" aria-hidden="true"></span> Faceted Browser </a></li>
-		<li><a class="active" href="/sparql/" title="Switch to /sparql endpoint"><span class="glyphicon glyphicon-new-window" aria-hidden="true"></span> Sparql Endpoint </a></li>
-	    </ul>
-	    <ul class="nav navbar-nav">
-	    <li class="dropdown">
-		<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span> Browse using <span class="caret"></span></a>
-		<ul class="dropdown-menu">
-		<li><a href="/describe/?uri=<?vsp http_url (page_resource_uri); ?>">OpenLink Faceted Browser</a></li>
-		<li><a href="http://linkeddata.uriburner.com/rdf-editor/#/editor?uri=<?vsp http_url(page_resource_uri); ?>&amp;view=statements">OpenLink Structured Data Editor</a></li>
-		<li><a href="http://en.lodlive.it/?<?vsp http_url (page_resource_uri); ?>">LodLive Browser</a></li>
-		<li><a href="http://lodmilla.sztaki.hu/lodmilla/?url=<?vsp http_url (page_resource_uri); ?>">LODmilla Browser</a></li>
-		</ul>
-	    </li>
-	    <li class="dropdown">
-		<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-file" aria-hidden="true"></span> Formats <span class="caret"></span></a>
-		<ul class="dropdown-menu">
-		<li>&nbsp;RDF:</li>
-		    <li><a href="<?= charset_recode(ntriples, 'UTF-8', '_WIDE_') ?>">N-Triples</a></li>
-		    <li><a href="<?= charset_recode(rdf_link, 'UTF-8', '_WIDE_') ?>">N3</a></li>
-		    <li><a href="<?= charset_recode(rdf_link5, 'UTF-8', '_WIDE_') ?>">Turtle</a></li>
-		    <li><a href="<?= charset_recode(rdf_link3, 'UTF-8', '_WIDE_') ?>">JSON</a></li>
-		    <li><a href="<?= charset_recode(rdf_link2, 'UTF-8', '_WIDE_') ?>">XML</a></li>
-		<li class="divider"></li>
-		<li>&nbsp;OData:</li>
-		    <li><a href="<?= charset_recode(atom_link, 'UTF-8', '_WIDE_') ?>">Atom</a></li>
-		    <li><a href="<?= charset_recode(jsod, 'UTF-8', '_WIDE_') ?>">JSON</a></li>
-		<li class="divider"></li>
-		<li>&nbsp;Microdata:</li>
-		    <li><a href="<?= charset_recode(md_json_link, 'UTF-8', '_WIDE_') ?>">JSON</a></li>
-		    <li><a href="<?= charset_recode(text_link, 'UTF-8', '_WIDE_') ?>">HTML</a></li>
-		<li class="divider"></li>
-		<li>&nbsp;Embedded:</li>
-		    <li><a href="<?= charset_recode(embed_json, 'UTF-8', '_WIDE_') ?>">JSON</a></li>
-		    <li><a href="<?= charset_recode(embed_turtle, 'UTF-8', '_WIDE_') ?>">Turtle</a></li>
-		<li class="divider"></li>
-		    <?vsp if (__proc_exists ('DB.DBA.RDF_TRIPLES_TO_CXML') is not null) { ?>
-		        <li><a href="<?= cxml_link ?>">CXML</a></li>
-		    <?vsp } ?>
-		    <li><a href="<?= csv_link ?>">CSV</a></li>
-		    <li><a href="<?= charset_recode (json_ld_link, 'UTF-8', '_WIDE_') ?>">JSON-LD</a></li>
-		</ul>
-	    </li>
-	    </ul>
-	</div>
-    </div>
-</div>
+	    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+		<li class="nav-item dropdown">
+		    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownBrowse" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+		    <i class="bi-eye-fill"></i> Browse using<span class="caret"></span></a>
 
-<div class="container">
-<!-- page-header -->
-    <div class="page-header">
-	<!-- div class="pull-right">
-	    <a href="<?=registry_get('dbp_imprint') ?>" title="About DBpedia">
-	    <img class="img-responsive" src="/statics/images/dbpedia_logo_land_120.png" alt="About DBpedia"/>
-	    </a>
-	</div -->
-	<h1 id="title">About:
-	    <a href="<?V charset_recode(dbp_ldd_get_proxy (page_resource_uri), 'UTF-8', '_WIDE_') ?>"><?= charset_recode(label, 'UTF-8', '_WIDE_') ?></a>
-	</h1>
-	<div class="page-resource-uri">
-	    An Entity of Type : <a href="<?= iri_uri ?>"><?= iri_type ?></a>,
-	    from Named Graph : <a href="<?V project_home_page ?>"><?V project_home_page ?></a>,
-	    within Data Space : <a href="http://<?V host ?>"><?V host ?></a>
-	</div>
-    </div>
-<!-- page-header -->
-<!-- row -->
-    <div class="row">
-	<div class="col-xs-9 col-sm-10">
-	    <p class="lead"><?vsp http (sprintf ('%s', _subject)); ?></p>
-	</div>
-<?vsp if (_thumbnail not like '/statics/%') { ?>
-	<div class="col-xs-3 col-sm-2">
-	  <a href="#" class="thumbnail">
-            <img src="<?= _thumbnail ?>" alt="thumbnail" style="max-width:100%; height:auto;">
-	  </a>
-	</div>
+		    <ul class="dropdown-menu" aria-labelledby="navbarDropdownBrowse">
+			<li class="dropdown-item"><a class="nav-link" href="/describe/?uri=<?vsp http_url (page_resource_uri); ?>">OpenLink Faceted Browser</a></li>
+			<li class="dropdown-item"><a class="nav-link" href="http://osde.demo.openlinksw.com/#/editor?uri=<?vsp http_url(rdf_link5); ?>&amp;view=statements">OpenLink Structured Data Editor</a></li>
+			<li class="dropdown-item"><a class="nav-link" href="http://en.lodlive.it/?<?vsp http_url (page_resource_uri); ?>">LodLive Browser</a></li>
+			<!-- li class="dropdown-item"><a class="nav-link" href="http://lodmilla.sztaki.hu/lodmilla/?url=<?vsp http_url (page_resource_uri); ?>">LODmilla Browser</a></li -->
+		    </ul>
+		</li>
+
+		<li class="nav-item dropdown">
+		    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownFormats" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+		    <i class="bi-file-earmark-fill"></i> Formats<span class="caret"></span></a>
+
+		    <ul class="dropdown-menu" aria-labelledby="navbarDropdownFormats">
+			<li class="dropdown-item-text">RDF:</li>
+			<li><a class="dropdown-item" href="<?= charset_recode(ntriples, 'UTF-8', '_WIDE_') ?>">N-Triples</a></li>
+			<li><a class="dropdown-item" href="<?= charset_recode(rdf_link, 'UTF-8', '_WIDE_') ?>">N3</a></li>
+			<li><a class="dropdown-item" href="<?= charset_recode(rdf_link5, 'UTF-8', '_WIDE_') ?>">Turtle</a></li>
+			<li><a class="dropdown-item" href="<?= charset_recode(rdf_link3, 'UTF-8', '_WIDE_') ?>">JSON</a></li>
+			<li><a class="dropdown-item" href="<?= charset_recode(rdf_link2, 'UTF-8', '_WIDE_') ?>">XML</a></li>
+			<li class="dropdown-divider"></li>
+			<li class="dropdown-item-text">OData:</li>
+			<li><a class="dropdown-item" href="<?= charset_recode(atom_link, 'UTF-8', '_WIDE_') ?>">Atom</a></li>
+			<li><a class="dropdown-item" href="<?= charset_recode(jsod_link, 'UTF-8', '_WIDE_') ?>">JSON</a></li>
+			<li class="dropdown-divider"></li>
+			<li class="dropdown-item-text">Microdata:</li>
+			<li><a class="dropdown-item" href="<?= charset_recode(md_json_link, 'UTF-8', '_WIDE_') ?>">JSON</a></li>
+			<li><a class="dropdown-item" href="<?= charset_recode(text_link, 'UTF-8', '_WIDE_') ?>">HTML</a></li>
+			<li class="dropdown-divider"></li>
+			<li class="dropdown-item-text">Embedded:</li>
+			<li><a class="dropdown-item" href="<?= charset_recode(embed_json, 'UTF-8', '_WIDE_') ?>">JSON</a></li>
+			<li><a class="dropdown-item" href="<?= charset_recode(embed_turtle, 'UTF-8', '_WIDE_') ?>">Turtle</a></li>
+			<li class="dropdown-divider"></li>
+			<li class="dropdown-item-text">Other:</li>
+			<li><a class="dropdown-item" href="<?= csv_link ?>">CSV</a></li>
+			<li><a class="dropdown-item" href="<?= charset_recode (json_ld_link, 'UTF-8', '_WIDE_') ?>">JSON-LD</a></li>
+<?vsp if (__proc_exists ('DB.DBA.RDF_TRIPLES_TO_CXML') is not null) { ?>
+			<li><a class="dropdown-item" href="<?= cxml_link ?>">CXML</a></li>
 <?vsp } ?>
-    </div>
-    <div class="row">
-	<div class="col-xs-12">
-	    <!-- proptable -->
-	    <table class="description table table-striped">
-	    <tr>
-		<th class="col-xs-3">Property</th>
-		<th class="col-xs-9">Value</th>
-	    </tr>
-<?vsp
-      declare sas, printed, vis int;
-      declare all_lang any;
-      all_lang := vector ('*', 1.0);
+		    </ul>
+		</li>
+	    </ul>
 
-      -- check resource domain and graph in order to print  owl:sameAs
-      if (page_resource_uri <> dbp_ldd_get_proxy (page_resource_uri) and registry_get ('dbp_graph') = registry_get('dbp_domain'))
-        sas := 1;
-      else
-        sas := 0;
+	    <ul class="navbar-nav ms-auto">
+		<li class="nav-item">
+		    <a class="nav-link" href="/fct/" title="Switch to /fct endpoint"><i class="bi-box-arrow-up-right"></i> Faceted Browser </a>
+		</li>
 
-      --select predicates for resource
-      for (select distinct P as PRED from DB.DBA.RDF_QUAD where S = _S and G = _G order by id_to_iri (P)) do
-	{
-	   dbp_ldd_http_print_l (id_to_iri (PRED), odd_position);
-           printed := 0;
-           -- select values for each predicate
-	   for (select top 300 O as OBJECT from DB.DBA.RDF_QUAD where S = _S and G = _G and P = PRED) do
-              {
-		if (id_to_iri (PRED) in (registry_get('dbp_domain') || '/property/redirect', registry_get('dbp_domain') || '/ontology/wikiPageRedirects') and isiri_id (OBJECT))
-                  {
-		    http_rewrite ();
-		    http_status_set (301);
-		    http_header (sprintf ('Location: %s\n', dbp_ldd_get_proxy (id_to_iri (OBJECT))));
-		    return;
-		  }
-		vis := dbp_ldd_http_print_r (OBJECT, 0, true_label, PRED, 1, langs);
-                printed := printed + vis;
-              }
-	   if (not printed)
-             {
-               for (select top 100 O as OBJECT from DB.DBA.RDF_QUAD where S = _S and G = _G and P = PRED) do
-		 dbp_ldd_http_print_r (OBJECT, 0, true_label, PRED, 1, all_lang);
-             }
+		<li class="nav-item">
+		    <a class="nav-link" href="/sparql/" title="Switch to /sparql endpoint"><i class="bi-box-arrow-up-right"></i> Sparql Endpoint </a>
+		</li>
 
-           if (sas and PRED = rdf_sas_iri ())
-	     {
-	       dbp_ldd_http_print_r (iri_to_id (page_resource_uri), 1, true_label, PRED, 1, langs);
-	       sas := 0;
-	     }
+	    </ul>
+	</div>
+   </div>
+</nav>
+<div style="margin-bottom: 60px"></div>
+<!-- /navbar -->
 
-	   http ('</ul></td></tr>');
-	}
-      -- print owl:sameAs
-      if (sas)
-        {
-	   dbp_ldd_http_print_l (id_to_iri (rdf_sas_iri ()), odd_position);
-	   dbp_ldd_http_print_r (iri_to_id (page_resource_uri), 1, null, rdf_sas_iri (), 1, langs);
-	   http ('</ul></td></tr>');
-	}
-      -- check for reverse triples
-      for (select distinct P as PRED from DB.DBA.RDF_QUAD where O = _O and G = _G order by id_to_iri (P)) do
-	{
-	   dbp_ldd_http_print_l (id_to_iri (PRED), odd_position, 1);
-           printed := 0;
-	   for (select top 300 S as OBJECT from DB.DBA.RDF_QUAD where O = _O and G = _G and P = PRED) do
-              {
-		vis := dbp_ldd_http_print_r (OBJECT, 0, true_label, PRED, 0, langs);
-                printed := printed + vis;
-              }
-	   if (not printed)
-             {
-	       for (select top 100 S as OBJECT from DB.DBA.RDF_QUAD where O = _O and G = _G and P = PRED) do
-		 dbp_ldd_http_print_r (OBJECT, 0, true_label, PRED, 0, all_lang);
-             }
-	   http ('</ul></td></tr>');
-	}
 
-       if  (odd_position = 0)
-	 {
-	    http_request_status ('HTTP/1.1 404 Not found');
-	    http ('<tr><td colspan="2"><p>No further information is available. (The requested entity is unknown)</p></td></tr>');
-	 }
-?>
-      </table>
-    </div>
-<!-- row  -->
-</div>
-</div>
-<!-- footer -->
-<div class="footer">
-    <div class="container">
-	<a href="https://virtuoso.openlinksw.com" title="OpenLink Virtuoso"><img class="powered_by" src="/statics/images/virt_power_no_border.png" alt="Powered by OpenLink Virtuoso"/></a>&nbsp; &nbsp;
-	<a href="http://linkeddata.org/"><img alt="This material is Open Knowledge" src="/statics/images/LoDLogo.gif"/></a> &nbsp; &nbsp;
-	<a href="<?= project_home_page ?>/sparql"><img alt="W3C Semantic Web Technology" src="/statics/images/sw-sparql-blue.png"/></a> &nbsp;  &nbsp;
-	<a href="https://opendefinition.org/"><img alt="This material is Open Knowledge" src="/statics/images/od_80x15_red_green.png"/></a>&nbsp; &nbsp;
-	<span style="display:none;" about=""
-	    resource="http://www.w3.org/TR/rdfa-syntax"
-	    rel="dc:conformsTo">
-	    <a href="https://validator.w3.org/check?uri=referer">
-		<img src="https://www.w3.org/Icons/valid-xhtml-rdfa" alt="Valid XHTML + RDFa" height="27px" />
-	    </a>
-	</span>
-	<br />
-	<div class="text-muted">
-	    <?vsp dbp_wikipedia_cc_by_sa(_S, _G); ?>
+<!-- page-header -->
+<section>
+    <div class="container-xl">
+	<div class="row">
+	    <div class="col">
+		<h1 id="title" class="display-6"><b>About:</b>
+		    <a href="<?V charset_recode(dbp_ldd_get_proxy (page_resource_uri), 'UTF-8', '_WIDE_') ?>"><?= charset_recode(label, 'UTF-8', '_WIDE_') ?></a>
+		</h1>
+	    </div>
+	</div>
+	<div class="row">
+	    <div class="col">
+		<div class="text-muted">
+		    <span class="text-nowrap">An Entity of Type: <a href="<?= iri_uri ?>"><?= iri_type ?></a>, </span>
+		    <span class="text-nowrap">from Named Graph:  <a href="<?V project_home_page ?>"><?V project_home_page ?></a>, </span>
+		    <span class="text-nowrap">within Data Space: <a href="http://<?V host ?>"><?V host ?></a></span>
+		</div>
+	    </div>
+	</div>
+	<div class="row pt-2">
+	    <div class="col-xs-9 col-sm-10">
+		<p class="lead"><?V _subject ?></p>
+	    </div>
+<?vsp if (_thumbnail not like '/statics/%') { ?>
+	    <div class="col-xs-3 col-sm-2">
+		<a href="#" class="thumbnail">
+		    <img src="<?= _thumbnail ?>" alt="thumbnail" class="img-fluid" />
+		</a>
+	    </div>
+<?vsp } ?>
 	</div>
     </div>
-</div>
-<!-- #footer -->
-<!--#content-->
-    <!--script type="text/javascript">
-     Place any Javascript code e.g. Google Analytics scripts
-    </script-->
-    <?vsp if (isstring (registry_get ('dbpedia_urchinTracker'))) { ?>
-	<script type="text/javascript">
-	  var _gaq = _gaq || [];
-	  _gaq.push(['_setAccount', '<?V registry_get ('dbpedia_urchinTracker')  ?>']);
-	  _gaq.push(['_trackPageview']);
+</section>
+<!-- page-header -->
 
-	  (function() {
-	    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-	    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-	    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-	  })();
-	</script>
-    <?vsp } ?>
-    <script type="text/javascript" src="/statics/js/jquery.min.js"></script>
-    <script type="text/javascript" src="/statics/js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="/statics/js/dbpedia.js"></script>
+<!-- property-table -->
+<section>
+    <div class="container-xl">
+	<div class="row">
+	    <div class="table-responsive">
+		<table class="table table-hover table-sm table-light">
+		    <thead>
+			<tr>
+			    <th class="col-xs-3 ">Property</th>
+			    <th class="col-xs-9 px-3">Value</th>
+			</tr>
+		    </thead>
+		    <tbody>
+<?vsp
+    declare sas, printed, vis int;
+    declare all_lang any;
+    all_lang := vector ('*', 1.0);
+
+    -- check resource domain and graph in order to print  owl:sameAs
+    if (page_resource_uri <> dbp_ldd_get_proxy (page_resource_uri) and registry_get ('dbp_graph') = registry_get('dbp_domain'))
+	sas := 1;
+    else
+	sas := 0;
+
+    --select predicates for resource
+    for (select distinct P as PRED from DB.DBA.RDF_QUAD where S = _S and G = _G order by id_to_iri (P)) do
+    {
+	dbp_ldd_http_print_l (id_to_iri (PRED), odd_position);
+	printed := 0;
+	-- select values for each predicate
+	for (select top 300 O as OBJECT from DB.DBA.RDF_QUAD where S = _S and G = _G and P = PRED) do
+	{
+	    if (id_to_iri (PRED) in (registry_get('dbp_domain') || '/property/redirect', registry_get('dbp_domain') || '/ontology/wikiPageRedirects') and isiri_id (OBJECT))
+	    {
+		http_rewrite ();
+		http_status_set (301);
+		http_header (sprintf ('Location: %s\n', dbp_ldd_get_proxy (id_to_iri (OBJECT))));
+		return;
+	    }
+	    vis := dbp_ldd_http_print_r (OBJECT, 0, true_label, PRED, 1, langs);
+	    printed := printed + vis;
+	}
+	if (not printed)
+	{
+	    for (select top 100 O as OBJECT from DB.DBA.RDF_QUAD where S = _S and G = _G and P = PRED) do
+		dbp_ldd_http_print_r (OBJECT, 0, true_label, PRED, 1, all_lang);
+	}
+
+	if (sas and PRED = rdf_sas_iri ())
+	{
+	    dbp_ldd_http_print_r (iri_to_id (page_resource_uri), 1, true_label, PRED, 1, langs);
+	    sas := 0;
+	}
+
+	http ('</ul></td></tr>');
+    }
+    -- print owl:sameAs
+    if (sas)
+    {
+	dbp_ldd_http_print_l (id_to_iri (rdf_sas_iri ()), odd_position);
+	dbp_ldd_http_print_r (iri_to_id (page_resource_uri), 1, null, rdf_sas_iri (), 1, langs);
+	http ('</ul></td></tr>');
+    }
+    -- check for reverse triples
+    for (select distinct P as PRED from DB.DBA.RDF_QUAD where O = _O and G = _G order by id_to_iri (P)) do
+    {
+	dbp_ldd_http_print_l (id_to_iri (PRED), odd_position, 1);
+	printed := 0;
+	for (select top 300 S as OBJECT from DB.DBA.RDF_QUAD where O = _O and G = _G and P = PRED) do
+	{
+	    vis := dbp_ldd_http_print_r (OBJECT, 0, true_label, PRED, 0, langs);
+	    printed := printed + vis;
+	}
+	if (not printed)
+	{
+	    for (select top 100 S as OBJECT from DB.DBA.RDF_QUAD where O = _O and G = _G and P = PRED) do
+		dbp_ldd_http_print_r (OBJECT, 0, true_label, PRED, 0, all_lang);
+	}
+	http ('</ul></td></tr>');
+    }
+
+    if  (odd_position = 0)
+    {
+	http_request_status ('HTTP/1.1 404 Not found');
+	http ('<tr><td colspan="2"><p>No further information is available. (The requested entity is unknown)</p></td></tr>');
+    }
+?>
+		    </tbody>
+		</table>
+	    </div>
+	</div>
+    </div>
+</section>
+<!-- property-table -->
+
+<!-- footer -->
+<section>
+    <div class="container-xl">
+	<div class="text-center p-4 bg-light">
+	    <a href="https://virtuoso.openlinksw.com/" title="OpenLink Virtuoso"><img class="powered_by" src="/statics/images/virt_power_no_border.png" alt="Powered by OpenLink Virtuoso"/></a>&#160; &#160;
+	    <a href="http://linkeddata.org/"><img alt="This material is Open Knowledge" src="/statics/images/LoDLogo.gif"/></a> &#160; &#160;
+	    <a href="<?= sparql_endpoint ?>"><img alt="W3C Semantic Web Technology" src="/statics/images/sw-sparql-blue.png"/></a> &#160;  &#160;
+	    <a href="https://opendefinition.org/"><img alt="This material is Open Knowledge" src="/statics/images/od_80x15_red_green.png"/></a>&#160; &#160;
+	    <span style="display:none;" about=""
+		resource="http://www.w3.org/TR/rdfa-syntax"
+		rel="dc:conformsTo">
+		<a href="https://validator.w3.org/check?uri=referer">
+		    <img src="https://www.w3.org/Icons/valid-xhtml-rdfa" alt="Valid XHTML + RDFa" />
+		</a>
+	    </span>
+	    <br />
+	    <small class="text-muted">
+		<?vsp dbp_wikipedia_cc_by_sa(_S, _G); ?>
+	    </small>
+	</div>
+    </div>
+</section>
+<!-- #footer -->
+
+<!-- scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+	integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+	crossorigin="anonymous">
+    </script>
 </body>
 </html>
