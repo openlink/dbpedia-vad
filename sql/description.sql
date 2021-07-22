@@ -604,7 +604,7 @@ create procedure dbp_ldd_http_print_l (in p_text any, inout odd_position int, in
    else
      title := sprintf (' title="%V"', title);
 
-   http (sprintf ('<tr class="%s"><td class="property">', either(mod (odd_position, 2), 'odd', 'even')));
+   http (sprintf ('<tr class="%s"><td class="col-2">', either(mod (odd_position, 2), 'odd', 'even')));
    if (rev) http ('is ');
    if (short_p is not null)
       http (sprintf ('<a class="uri" href="%V"%s><small>%V:</small>%V</a>\n',
@@ -618,7 +618,7 @@ create procedure dbp_ldd_http_print_l (in p_text any, inout odd_position int, in
 	charset_recode (title, 'UTF-8', '_WIDE_'),
 	charset_recode (p_prefix, 'UTF-8', '_WIDE_')));
    if (rev) http (' of');
-   http ('</td><td><ul>\n');
+   http ('</td><td class="col-10 text-break"><ul>\n');
 }
 ;
 
