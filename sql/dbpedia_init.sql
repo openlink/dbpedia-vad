@@ -36,9 +36,12 @@ DB.DBA.VHOST_REMOVE ( lhost=>registry_get ('dbp_lhost'), vhost=>registry_get ('d
 DB.DBA.VHOST_REMOVE ( lhost=>registry_get ('dbp_lhost'), vhost=>registry_get ('dbp_vhost'), lpath=>'/sparql');
 DB.DBA.VHOST_REMOVE ( lhost=>registry_get ('dbp_lhost'), vhost=>registry_get ('dbp_vhost'), lpath=>'/property');
 DB.DBA.VHOST_REMOVE ( lhost=>registry_get ('dbp_lhost'), vhost=>registry_get ('dbp_vhost'), lpath=>'/data4');
+DB.DBA.VHOST_REMOVE ( lhost=>registry_get ('dbp_lhost'), vhost=>registry_get ('dbp_vhost'), lpath=>'/data5');
+DB.DBA.VHOST_REMOVE ( lhost=>registry_get ('dbp_lhost'), vhost=>registry_get ('dbp_vhost'), lpath=>'/data6');
 DB.DBA.VHOST_REMOVE ( lhost=>registry_get ('dbp_lhost'), vhost=>registry_get ('dbp_vhost'), lpath=>'/about');
 DB.DBA.VHOST_REMOVE ( lhost=>registry_get ('dbp_lhost'), vhost=>registry_get ('dbp_vhost'), lpath=>'/snorql');
 DB.DBA.VHOST_REMOVE ( lhost=>registry_get ('dbp_lhost'), vhost=>registry_get ('dbp_vhost'), lpath=>'/sparql-auth');
+DB.DBA.VHOST_REMOVE ( lhost=>registry_get ('dbp_lhost'), vhost=>registry_get ('dbp_vhost'), lpath=>'/datatype');
 
 
 --# root proxy to dbpedia wiki
@@ -424,6 +427,7 @@ DB.DBA.URLREWRITE_CREATE_REGEX_RULE ( 'prop_rule_18', 1, '/property/(.*)\x24', v
 DB.DBA.URLREWRITE_CREATE_REGEX_RULE ( 'prop_rule_19', 1, '/property/(.*)\x24', vector ('par_1'), 1,
 '/data4/%s.n3', vector ('par_1'), NULL, 'application/x-turtle', 2, 303, 'Content-Type: application/x-turtle');
 
+
 --# data4
 DB.DBA.VHOST_DEFINE ( lhost=>registry_get ('dbp_lhost'), vhost=>registry_get ('dbp_vhost'), lpath=>'/data4',
 	 ppath=>registry_get('_dbpedia_path_'),
@@ -437,6 +441,44 @@ DB.DBA.URLREWRITE_CREATE_RULELIST ( 'pvsp_rule_data4', 1, vector ('pvsp_data4_ru
 DB.DBA.URLREWRITE_CREATE_REGEX_RULE ( 'pvsp_data4_rule', 1, '/data4/(.*)\\.(n3|rdf)', vector ('par_1', 'f'), 1,
 '/sparql?default-graph-uri=http%%3A%%2F%%2F'||replace(registry_get('dbp_graph'),'http://','')||'&query=DESCRIBE+%%3Chttp%%3A%%2F%%2Fdbpedia.org%%2Fproperty%%2F%U%%3E&format=%U',
 vector ('par_1', 'f'), NULL, NULL, 2, null, '');
+
+
+--# datatype
+DB.DBA.VHOST_DEFINE ( lhost=>registry_get ('dbp_lhost'), vhost=>registry_get ('dbp_vhost'), lpath=>'/datatype',
+	 ppath=>'/',
+	 is_dav=>0,
+	 def_page=>'',
+	 opts=>vector ('url_rewrite', 'dbp_rule_list_type')
+);
+
+DB.DBA.URLREWRITE_CREATE_RULELIST ( 'dbp_rule_list_type', 1, vector ('type_rule_6', 'type_rule_7', 'type_rule_18', 'type_rule_19'));
+DB.DBA.URLREWRITE_CREATE_REGEX_RULE ( 'type_rule_6', 1, '(/[^#\\?]*)', vector ('par_1'), 1,
+registry_get('_dbpedia_path_')||'description.vsp?res=%U', vector ('par_1'), NULL, NULL, 0, 0, '');
+
+DB.DBA.URLREWRITE_CREATE_REGEX_RULE ( 'type_rule_7', 1, '/datatype/(.*)\x24', vector ('par_1'), 1,
+'/data6/g/%s.rdf', vector ('par_1'), NULL, 'application/rdf.xml', 2, 303, 'Content-Type: application/rdf+xml');
+
+DB.DBA.URLREWRITE_CREATE_REGEX_RULE ( 'type_rule_18', 1, '/datatype/(.*)\x24', vector ('par_1'), 1,
+'/data6/g/%s.n3', vector ('par_1'), NULL, 'text/rdf.n3', 1, 303, 'Content-Type: text/rdf+n3');
+
+DB.DBA.URLREWRITE_CREATE_REGEX_RULE ( 'type_rule_19', 1, '/datatype/(.*)\x24', vector ('par_1'), 1,
+'/data6/g/%s.n3', vector ('par_1'), NULL, 'application/x-turtle', 2, 303, 'Content-Type: application/x-turtle');
+
+
+--# data6
+DB.DBA.VHOST_DEFINE ( lhost=>registry_get ('dbp_lhost'), vhost=>registry_get ('dbp_vhost'), lpath=>'/data6/g',
+	 ppath=>registry_get('_dbpedia_path_'),
+	 is_dav=>atoi (registry_get('_dbpedia_dav_')),
+	 vsp_user=>'dba',
+	 opts=>vector ('url_rewrite', 'pvsp_rule_data6')
+);
+
+DB.DBA.URLREWRITE_CREATE_RULELIST ( 'pvsp_rule_data6', 1, vector ('pvsp_data6_rule'));
+
+DB.DBA.URLREWRITE_CREATE_REGEX_RULE ( 'pvsp_data6_rule', 1, '/data6/g/(.*)\\.(n3|rdf)', vector ('par_1', 'f'), 1,
+'/sparql?default-graph-uri=http%%3A%%2F%%2F'||replace(registry_get('dbp_graph'),'http://','')||'&query=DESCRIBE+%%3Chttp%%3A%%2F%%2Fdbpedia.org%%2Fdatatype%%2F%U%%3E&format=%U',
+vector ('par_1', 'f'), NULL, NULL, 2, null, '');
+
 
 --# about
 DB.DBA.VHOST_DEFINE (

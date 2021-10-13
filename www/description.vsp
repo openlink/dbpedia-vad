@@ -4,6 +4,7 @@
         dbp: http://dbpedia.org/property/
         dbo: http://dbedia.org/ontology/
         dct: http://purl.org/dc/terms/
+        dbd: http://dbpedia.org/datatype/
 	og:  https://ogp.me/ns#
 	"
 >

@@ -51,6 +51,7 @@ create procedure dbp_ldd_set_ns_decl ()
     dbp_domain || '/resource/', 				'dbpedia-'  || dbp_lang,
     dbp_domain || '/resource/' || dbp_category || ':',		'category-' || dbp_lang,
     dbp_domain || '/resource/' || dbp_template || ':', 		'template-' || dbp_lang,
+    dbp_domain || '/datatype/', 				'type-'     || dbp_lang,
 
     'http://dbpedia.org/ontology/',				'dbo',
     'http://dbpedia.org/property/',				'dbp',
@@ -59,6 +60,7 @@ create procedure dbp_ldd_set_ns_decl ()
     'http://dbpedia.org/resource/Template:',			'dbt',
     'http://dbpedia.org/units/',				'units',
     'http://dbpedia.org/class/yago/',				'yago',
+    'http://dbpedia.org/datatype/',				'dbd',
 
     'http://data.nytimes.com/',					'nyt',
     'http://linkedgeodata.org/triplify/', 			'lgdt',
