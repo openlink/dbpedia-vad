@@ -456,17 +456,17 @@ DB.DBA.URLREWRITE_CREATE_REGEX_RULE ( 'type_rule_6', 1, '(/[^#\\?]*)', vector ('
 registry_get('_dbpedia_path_')||'description.vsp?res=%U', vector ('par_1'), NULL, NULL, 0, 0, '');
 
 DB.DBA.URLREWRITE_CREATE_REGEX_RULE ( 'type_rule_7', 1, '/datatype/(.*)\x24', vector ('par_1'), 1,
-'/data6/g/%s.rdf', vector ('par_1'), NULL, 'application/rdf.xml', 2, 303, 'Content-Type: application/rdf+xml');
+'/data6/%s.rdf', vector ('par_1'), NULL, 'application/rdf.xml', 2, 303, 'Content-Type: application/rdf+xml');
 
 DB.DBA.URLREWRITE_CREATE_REGEX_RULE ( 'type_rule_18', 1, '/datatype/(.*)\x24', vector ('par_1'), 1,
-'/data6/g/%s.n3', vector ('par_1'), NULL, 'text/rdf.n3', 1, 303, 'Content-Type: text/rdf+n3');
+'/data6/%s.n3', vector ('par_1'), NULL, 'text/rdf.n3', 1, 303, 'Content-Type: text/rdf+n3');
 
 DB.DBA.URLREWRITE_CREATE_REGEX_RULE ( 'type_rule_19', 1, '/datatype/(.*)\x24', vector ('par_1'), 1,
-'/data6/g/%s.n3', vector ('par_1'), NULL, 'application/x-turtle', 2, 303, 'Content-Type: application/x-turtle');
+'/data6/%s.n3', vector ('par_1'), NULL, 'application/x-turtle', 2, 303, 'Content-Type: application/x-turtle');
 
 
 --# data6
-DB.DBA.VHOST_DEFINE ( lhost=>registry_get ('dbp_lhost'), vhost=>registry_get ('dbp_vhost'), lpath=>'/data6/g',
+DB.DBA.VHOST_DEFINE ( lhost=>registry_get ('dbp_lhost'), vhost=>registry_get ('dbp_vhost'), lpath=>'/data6',
 	 ppath=>registry_get('_dbpedia_path_'),
 	 is_dav=>atoi (registry_get('_dbpedia_dav_')),
 	 vsp_user=>'dba',
@@ -475,7 +475,7 @@ DB.DBA.VHOST_DEFINE ( lhost=>registry_get ('dbp_lhost'), vhost=>registry_get ('d
 
 DB.DBA.URLREWRITE_CREATE_RULELIST ( 'pvsp_rule_data6', 1, vector ('pvsp_data6_rule'));
 
-DB.DBA.URLREWRITE_CREATE_REGEX_RULE ( 'pvsp_data6_rule', 1, '/data6/g/(.*)\\.(n3|rdf)', vector ('par_1', 'f'), 1,
+DB.DBA.URLREWRITE_CREATE_REGEX_RULE ( 'pvsp_data6_rule', 1, '/data6/(.*)\\.(n3|rdf)', vector ('par_1', 'f'), 1,
 '/sparql?default-graph-uri=http%%3A%%2F%%2F'||replace(registry_get('dbp_graph'),'http://','')||'&query=DESCRIBE+%%3Chttp%%3A%%2F%%2Fdbpedia.org%%2Fdatatype%%2F%U%%3E&format=%U',
 vector ('par_1', 'f'), NULL, NULL, 2, null, '');
 
