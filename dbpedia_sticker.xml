@@ -35,7 +35,9 @@
 	registry_set('_dbpedia_dav_', '1');
 
 	DB.DBA.VAD_LOAD_SQL_FILE('$BASE_PATH$/dbpedia/dbpedia_local.sql', 0, 'report', $ISDAV$);
-	DB.DBA.VAD_LOAD_SQL_FILE('$BASE_PATH$/dbpedia/dbpedia_init.sql', 0, 'report', $ISDAV$);
+	DB.DBA.VAD_LOAD_SQL_FILE('$BASE_PATH$/dbpedia/dbpedia_pl.sql', 0, 'report', $ISDAV$);
+	--DB.DBA.VAD_LOAD_SQL_FILE('$BASE_PATH$/dbpedia/dbpedia_init.sql', 0, 'report', $ISDAV$);
+	DB.DBA.VAD_LOAD_SQL_FILE('$BASE_PATH$/dbpedia/dbpedia_del.sql', 0, 'report', $ISDAV$);
 	DB.DBA.VAD_LOAD_SQL_FILE('$BASE_PATH$/dbpedia/description.sql', 0, 'report', $ISDAV$);
 
 	RDFS_RULE_SET ('http://dbpedia.org/resource/inference/rules/dbpedia#', 'http://dbpedia.org/resource/classes#');
