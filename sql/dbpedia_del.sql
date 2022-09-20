@@ -33,7 +33,6 @@ EXEC_STMT ('DB.DBA.URLREWRITE_DROP_RULELIST(''dbp_rule_list_owl'', 1)', 0);
 EXEC_STMT ('DB.DBA.URLREWRITE_DROP_RULELIST(''dbp_rule_list_prop'', 1)', 0);
 EXEC_STMT ('DB.DBA.URLREWRITE_DROP_RULELIST(''dbp_rule_list_type'', 1)', 0);
 EXEC_STMT ('DB.DBA.URLREWRITE_DROP_RULELIST(''dbp_wc_rule_list1'', 1)', 0);
-EXEC_STMT ('DB.DBA.URLREWRITE_DROP_RULELIST(''ext_about_http_proxy_rule_list1'', 1)', 0);
 EXEC_STMT ('DB.DBA.URLREWRITE_DROP_RULELIST(''pvsp_rule_data3'', 1)', 0);
 EXEC_STMT ('DB.DBA.URLREWRITE_DROP_RULELIST(''pvsp_rule_data4'', 1)', 0);
 EXEC_STMT ('DB.DBA.URLREWRITE_DROP_RULELIST(''pvsp_rule_data6'', 1)', 0);
