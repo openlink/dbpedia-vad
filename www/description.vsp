@@ -13,7 +13,7 @@
 --  This file is part of the OpenLink Software Virtuoso Open-Source (VOS)
 --  project.
 --
---  Copyright (C) 1998-2022 OpenLink Software
+--  Copyright (C) 1998-2023 OpenLink Software
 --
 --  This project is free software; you can redistribute it and/or modify it
 --  under the terms of the GNU General Public License as published by the
@@ -130,7 +130,7 @@
    csv_link     := rdf_link  || '&format=text%2Fcsv';
    cxml_link    := rdf_link  || '&format=text%2Fcxml';
    md_json_link := rdf_link  || '&format=application%2Fmicrodata%2Bjson';
-   json_ld_link := rdf_link  || '&format=application%2Fjson-ld';
+   json_ld_link := rdf_link  || '&format=application%2Fld%2Bjson';
    embed_json   := rdf_link  || '&format=text%2Fx-html-script-ld%2Bjson';
    embed_turtle := rdf_link  || '&format=text%2Fx-html-script-turtle';
 
