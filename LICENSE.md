@@ -1,5 +1,5 @@
 # License
-*Copyright (C) 2008-2023 OpenLink Software <support@openlinksw.com>*
+*Copyright (C) 2008-2024 OpenLink Software <support@openlinksw.com>*
 
 ## OpenLink DBpedia VAD
 
