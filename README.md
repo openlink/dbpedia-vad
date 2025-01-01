@@ -1,6 +1,6 @@
 # OpenLink DBpedia VAD
 
-*Copyright (C) 2008-2024 OpenLink Software <support@openlinksw.com>*
+*Copyright (C) 2008-2025 OpenLink Software <support@openlinksw.com>*
 
 # License
 This software is licensed under the GNU General Public License.
