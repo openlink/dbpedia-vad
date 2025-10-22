@@ -21,8 +21,6 @@ DBPEDIA_FILES	:= \
 	$(srcdir)/vadpacker/ChangeLog \
 	$(srcdir)/vadpacker/NEWS \
 	$(srcdir)/vadpacker/README \
-	$(srcdir)/vadpacker/README-elementtree \
-	$(srcdir)/vadpacker/elementtree/*.py \
 	$(srcdir)/www/*.vsp \
 	$(srcdir)/www/statics/css/*.css \
 	$(srcdir)/www/statics/images/*.gif \
